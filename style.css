@@ -1,0 +1,328 @@
+/* ==========================================================================
+   1. RESET BÁSICO E VARIÁVEIS DE DESIGN
+   ========================================================================== */
+
+/*
+  Definição do Box Sizing global.
+  Garante que padding e borders não aumentem a largura total dos elementos.
+*/
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/*
+  Paleta de Cores e Tipografia (Garantindo Contraste Apropriado conforme WCAG AA)
+  - Taxa de contraste do texto principal em fundo claro: Superior a 7:1 (Exigência WCAG é no mínimo 4.5:1).
+  - Azul Primário (#004085): Proporciona alto contraste com o texto branco.
+*/
+:root {
+    --primary-color: #004085;
+    --primary-hover: #002752;
+    --secondary-color: #2b303a;
+    --secondary-hover: #12151a;
+    --text-color: #1a1a1a;
+    --bg-light: #ffffff;
+    --bg-alt: #f4f6f8;
+    --focus-ring: #0056b3;
+    --font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+/* Configurações Globais do Corpo da Página */
+body {
+    font-family: var(--font-family);
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--bg-light);
+}
+
+/* Container para centralizar o conteúdo e limitar a largura máxima */
+.container {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1.25rem;
+}
+
+
+/* ==========================================================================
+   2. RECURSOS DE ACESSIBILIDADE E FOCO
+   ========================================================================== */
+
+/*
+  Link "Pular para o conteúdo principal" (Skip Link)
+  Fica oculto por padrão fora da tela e só aparece quando recebe foco via navegação por teclado (Tab).
+*/
+.skip-link {
+    position: absolute;
+    top: -100px;
+    left: 0;
+    background: var(--primary-color);
+    color: #ffffff;
+    padding: 0.75rem 1.5rem;
+    z-index: 1000;
+    font-weight: bold;
+    text-decoration: none;
+    transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+    top: 0;
+}
+
+/*
+  Indicação Visual Clara de Foco (:focus-visible)
+  Exigência estrita da WCAG (2.4.7). Exibe um anel visual bem visível apenas ao navegar via teclado.
+*/
+:focus-visible {
+    outline: 3px solid var(--focus-ring);
+    outline-offset: 3px;
+}
+
+
+/* ==========================================================================
+   3. CABEÇALHO E NAVEGAÇÃO (FLEXBOX)
+   ========================================================================== */
+
+.header {
+    background-color: var(--bg-light);
+    border-bottom: 1px solid #e0e0e0;
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+/* Flexbox utilizado para alinhar o Logo e o Menu de Navegação nas extremidades */
+.header-container {
+    display: flex;
+    justify-content: space-between; /* Espaça o logo e a navegação */
+    align-items: center;            /* Alinha os itens verticalmente */
+    flex-wrap: wrap;                 /* Permite a quebra de linha em telas pequenas */
+    gap: 1rem;
+}
+
+.logo a {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.logo a span {
+    color: var(--secondary-color);
+}
+
+/* Organização dos links da lista de navegação usando Flexbox */
+.nav-list {
+    display: flex;
+    list-style: none;
+    gap: 1.5rem; /* Adiciona espaçamento uniforme entre os links */
+}
+
+.nav-list a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 600;
+    padding: 0.5rem 0;
+    transition: color 0.2s;
+}
+
+.nav-list a:hover {
+    color: var(--primary-color);
+    text-decoration: underline;
+}
+
+
+/* ==========================================================================
+   4. SEÇÕES E COMPONENTES
+   ========================================================================== */
+
+.section {
+    padding: 4rem 0;
+}
+
+.bg-alt {
+    background-color: var(--bg-alt);
+}
+
+.section-title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+    text-align: center;
+}
+
+.section-description {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 2.5rem auto;
+}
+
+/* Hero Banner com alinhamento vertical usando Flexbox */
+.hero {
+    background-color: var(--bg-alt);
+    padding: 5rem 0;
+    text-align: center;
+}
+
+.hero-container {
+    display: flex;
+    flex-direction: column; /* Organiza título, parágrafo e botão em coluna */
+    align-items: center;    /* Centraliza os elementos no eixo horizontal */
+    gap: 1.5rem;
+}
+
+.hero h1 {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    max-width: 800px;
+}
+
+/* Grid de Cartões usando Flexbox Flex-Wrap */
+.cards-grid {
+    display: flex;
+    flex-wrap: wrap; /* Permite que os cartões passem para a linha de baixo se não couberem */
+    gap: 2rem;
+    justify-content: center;
+}
+
+.card {
+    background-color: var(--bg-light);
+    border: 1px solid #dcdcdc;
+    border-radius: 8px;
+    padding: 2rem;
+    flex: 1 1 300px; /* Cresce, encolhe e mantém um tamanho base mínimo de 300px */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Mantém os botões sempre alinhados na parte inferior */
+    gap: 1rem;
+}
+
+.card h3 {
+    color: var(--secondary-color);
+}
+
+
+/* ==========================================================================
+   5. BOTÕES INTERATIVOS
+   ========================================================================== */
+
+.btn {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: #ffffff;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-hover);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: var(--secondary-color);
+    border-color: var(--secondary-color);
+}
+
+.btn-secondary:hover {
+    background-color: var(--secondary-color);
+    color: #ffffff;
+}
+
+.btn-block {
+    width: 100%;
+}
+
+
+/* ==========================================================================
+   6. FORMULÁRIO ACESSÍVEL
+   ========================================================================== */
+
+.contact-form {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-group label {
+    font-weight: 600;
+}
+
+.required {
+    color: #c82333; /* Vermelho destacado para campos obrigatórios */
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #767676; /* Borda visível com bom contraste */
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 1rem;
+}
+
+
+/* ==========================================================================
+   7. RODAPÉ
+   ========================================================================== */
+
+.footer {
+    background-color: var(--secondary-color);
+    color: #ffffff;
+    padding: 2rem 0;
+    margin-top: 4rem;
+}
+
+.footer-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+
+/* ==========================================================================
+   8. RESPONSIVIDADE (MEDIA QUERIES)
+   ========================================================================== */
+
+/* Ajustes para dispositivos móveis */
+@media (max-width: 600px) {
+    .header-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .hero h1 {
+        font-size: 1.75rem;
+    }
+
+    .section-title {
+        font-size: 1.5rem;
+    }
+}

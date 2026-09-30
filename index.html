@@ -1,11 +1,131 @@
 <!DOCTYPE html>
+<!-- O atributo lang="pt-br" informa aos leitores de tela qual idioma deve ser utilizado na síntese de voz -->
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
+    <!-- Meta tag essencial para responsividade em dispositivos móveis -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>nexus</title>
+    <title>Nexus Tech | Soluções Digitais e Inovação</title>
+    <!-- Vinculação ao arquivo CSS externo -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
+
+    <!-- Link de atalho acessível: Permite que usuários de teclado saltem a navegação e vão direto ao conteúdo principal (WCAG 2.4.1) -->
+    <a href="#conteudo-principal" class="skip-link">Pular para o conteúdo principal</a>
+
+    <!-- <header>: Região semântica (landmark) do cabeçalho da página -->
+    <header class="header">
+        <div class="container header-container">
+            <!-- Marca/Logo da empresa -->
+            <div class="logo">
+                <a href="#home" aria-label="Nexus Tech - Página Inicial">Nexus<span>Tech</span></a>
+            </div>
+
+            <!-- <nav>: Região semântica reservada para links de navegação principal -->
+            <nav aria-label="Navegação Principal">
+                <ul class="nav-list">
+                    <li><a href="#home">Início</a></li>
+                    <li><a href="#sobre">Sobre Nós</a></li>
+                    <li><a href="#servicos">Serviços</a></li>
+                    <li><a href="#contato">Contato</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- <main>: Indica a área com o conteúdo principal e único da página. O id permite o funcionamento do link de atalho -->
+    <main id="conteudo-principal">
+
+        <!-- <section>: Seção semântica delimitada para o Banner/Apresentação -->
+        <section id="home" class="hero" aria-labelledby="hero-title">
+            <div class="container hero-container">
+                <!-- aria-labelledby associa esta seção ao seu título principal -->
+                <h1 id="hero-title">Transformando ideias em soluções digitais acessíveis</h1>
+                <p>Ajudamos empresas a crescerem com softwares sob medida, design inclusivo e alta tecnologia.</p>
+                <!-- Botão com papel visual de Call To Action (CTA) -->
+                <a href="#contato" class="btn btn-primary">Fale com um Especialista</a>
+            </div>
+        </section>
+
+        <!-- Seção Sobre a Empresa -->
+        <section id="sobre" class="section" aria-labelledby="sobre-title">
+            <div class="container">
+                <h2 id="sobre-title" class="section-title">Sobre a Nexus Tech</h2>
+                <p class="section-description">
+                    Fundada em 2026, a Nexus Tech é especialista em desenvolvimento web moderno, com foco irrestrito em acessibilidade, usabilidade e performance. Acreditamos que a web deve ser um espaço livre e alcançável por todas as pessoas.
+                </p>
+            </div>
+        </section>
+
+        <!-- Seção de Serviços -->
+        <section id="servicos" class="section bg-alt" aria-labelledby="servicos-title">
+            <div class="container">
+                <h2 id="servicos-title" class="section-title">Nossos Serviços</h2>
+                
+                <div class="cards-grid">
+                    <!-- <article>: Utilizado para blocos de conteúdo autônomos e independentes -->
+                    <article class="card">
+                        <h3>Desenvolvimento Web</h3>
+                        <p>Criação de sites e sistemas web rápidos, responsivos e otimizados para motores de busca (SEO).</p>
+                        <!-- Exemplo de link interativo formatado como botão -->
+                        <a href="#contato" class="btn btn-secondary" aria-label="Saiba mais sobre Desenvolvimento Web">Saiba Mais</a>
+                    </article>
+
+                    <article class="card">
+                        <h3>Auditoria de Acessibilidade</h3>
+                        <p>Avaliação detalhada e adequação de sites às diretrizes internacionais da WCAG 2.1.</p>
+                        <a href="#contato" class="btn btn-secondary" aria-label="Saiba mais sobre Auditoria de Acessibilidade">Saiba Mais</a>
+                    </article>
+
+                    <article class="card">
+                        <h3>UI/UX Design Inclusivo</h3>
+                        <p>Prototipagem de interfaces focadas na melhor experiência para todo e qualquer tipo de usuário.</p>
+                        <a href="#contato" class="btn btn-secondary" aria-label="Saiba mais sobre UI/UX Design Inclusivo">Saiba Mais</a>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção de Contato -->
+        <section id="contato" class="section" aria-labelledby="contato-title">
+            <div class="container">
+                <h2 id="contato-title" class="section-title">Entre em Contato</h2>
+                <p class="section-description">Preencha o formulário abaixo para solicitar um orçamento ou tirar suas dúvidas.</p>
+
+                <!-- <form>: Estrutura o formulário acessível -->
+                <form action="#" method="post" class="contact-form" novalidate>
+                    <div class="form-group">
+                        <!-- O atributo 'for' do <label> DEVE corresponder exatamente ao 'id' do <input> para leitores de tela -->
+                        <label for="nome">Nome Completo <span class="required" aria-hidden="true">*</span></label>
+                        <input type="text" id="nome" name="nome" required aria-required="true" autocomplete="name" placeholder="Ex: Maria Silva">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">E-mail corporativo ou pessoal <span class="required" aria-hidden="true">*</span></label>
+                        <!-- type="email" ajuda na validação nativa e ajusta o teclado de celulares -->
+                        <input type="email" id="email" name="email" required aria-required="true" autocomplete="email" placeholder="nome@exemplo.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="mensagem">Sua Mensagem <span class="required" aria-hidden="true">*</span></label>
+                        <textarea id="mensagem" name="mensagem" rows="5" required aria-required="true" placeholder="Como podemos ajudar o seu negócio?"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block">Enviar Mensagem</button>
+                </form>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- <footer>: Região semântica reservada ao rodapé do documento -->
+    <footer class="footer">
+        <div class="container footer-container">
+            <p>&copy; 2026 Nexus Tech. Todos os direitos reservados.</p>
+            <p>Desenvolvido com foco em Acessibilidade Digital (WCAG 2.1 AA).</p>
+        </div>
+    </footer>
+
 </body>
 </html>
